@@ -1,0 +1,19 @@
+--- drivers/pinctrl/intel/pinctrl-baytrail.c	2019-06-25 15:10:08.883297391 +0200
++++ drivers/pinctrl/intel/pinctrl-baytrail_new.c	2019-06-25 01:24:46.074508388 +0200
+@@ -1661,8 +1661,14 @@
+ 
+ 		value = readl(reg);
+ 		if (value & BYT_DIRECT_IRQ_EN) {
+-			clear_bit(i, gc->irq.valid_mask);
+-			dev_dbg(dev, "excluding GPIO %d from IRQ domain\n", i);
++			if(i!=12){
++				clear_bit(i, gc->irq.valid_mask);
++				dev_dbg(dev, "excluding GPIO %d from IRQ domain\n", i);
++			}
++			else{
++				byt_gpio_clear_triggering(vg, i);
++				dev_dbg(dev, "keeping GPIO %d\n", i);
++			}
+ 		} else if ((value & BYT_PIN_MUX) == byt_get_gpio_mux(vg, i)) {
+ 			byt_gpio_clear_triggering(vg, i);
+ 			dev_dbg(dev, "disabling GPIO %d\n", i);
