@@ -1,5 +1,5 @@
 # yoga2linux
-Linux for Lenovo Yoga Tab 2
+Linux for Lenovo Yoga Tab 2 830f
 
 # Working hardware
 1. BQ27xxx battery contrller. Needed to display battery charge. Added to the DSDT, should work out of the box or need loading of bq27xxx_battery.
